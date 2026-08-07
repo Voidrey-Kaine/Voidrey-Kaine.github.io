@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* ============================================================
+   Brand palette — overrides Tailwind's default blue/purple/red
+   scales so every existing utility class (bg-blue-500, text-
+   purple-400, border-red-600, etc.) resolves to the real
+   Voidrey identity: crimson + amber + navy, not generic AI blue.
+   Change a value here and it updates everywhere at once.
+   ============================================================ */
+@theme {
+  --color-blue-200: #f7e3bd;
+  --color-blue-300: #f2c98a;
+  --color-blue-400: #d99a4e;
+  --color-blue-500: #c9863a;
+  --color-blue-600: #a8712c;
+
+  --color-purple-200: #b9c9dc;
+  --color-purple-300: #93a8c4;
+  --color-purple-400: #6d87a8;
+  --color-purple-500: #4f6d90;
+  --color-purple-600: #2c496e;
+  --color-purple-700: #1f3a58;
+  --color-purple-800: #182840;
+  --color-purple-900: #101c30;
+  --color-purple-950: #0a1220;
+
+  --color-red-400: #ec4b46;
+  --color-red-500: #d43138;
+  --color-red-600: #c62430;
+  --color-red-800: #6b1015;
+  --color-red-900: #4a0b0f;
+  --color-red-950: #300709;
+}
+
+:root {
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: #020205;
+    color: #cbd5e1;
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    selection-background-color: #c62430;
+    selection-color: #f8fafc;
+  }
+}
+
+/* Custom Typography Utility Classes */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-mono-code {
+  font-family: var(--font-mono);
+}
+
+/* Immersive UI Glassmorphism */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.glass-card-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card-hover:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px -15px rgba(217, 154, 78, 0.18);
+}
+
+/* Scanlines overlay effect */
+.scanlines {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.03) 0px,
+    rgba(255, 255, 255, 0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #020205;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+  border: 1px solid #334155;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #c62430;
+}
+
+/* Conic border rotation */
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes spin-border {
+  to {
+    --angle: 360deg;
+  }
+}
+
+.animated-border {
+  background: linear-gradient(#080a0f, #080a0f) padding-box,
+              conic-gradient(from var(--angle), #d99a4e, #182840, #c62430, #d99a4e) border-box;
+  border: 1px solid transparent;
+  animation: spin-border 6s linear infinite;
+}
+
+/* Glow pulse */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.08);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 5s ease-in-out infinite;
+}
+
+
